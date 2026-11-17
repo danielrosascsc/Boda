@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ana María & Daniel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Mulish:wght@300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+/* Plan: un jardín en bloques de color. Cada sección toma un tono de las flores
+   de la invitación (papel, oliva profundo, rosa, mantequilla, malva) y se
+   compone centrada, como una invitación impresa. Los nombres van en caligrafía;
+   los títulos en serif fina con versalitas espaciadas. Tema único (claro). */
+:root{
+  color-scheme: light;
+  --papel:#FAF9F5;
+  --crema:#F3EEE2;
+  --rosa:#F8E1DC;
+  --mantequilla:#FBF1D6;
+  --bosque:#56552F;
+  --tinta:#4D4629;
+  --tinta-suave:#7A7253;
+  --oliva:#8C8A56;
+  --malva:#B46F74;
+  --durazno:#E99560;
+  --linea:rgba(77,70,41,.22);
+  --caligrafia:"Pinyon Script","Snell Roundhand","Apple Chancery",cursive;
+  --display:"Cormorant Garamond","Cormorant","Times New Roman",serif;
+  --texto:"Mulish","Helvetica Neue",Arial,sans-serif;
+  --ancho:640px;
+  --barra:56px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--papel);color:var(--tinta);
+  font-family:var(--texto);font-weight:300;font-size:17px;line-height:1.65;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--malva);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+.envoltura{max-width:var(--ancho);margin:0 auto;padding:0 22px}
+
+/* Barra y menú desplegable */
+.barra{
+  position:sticky;top:0;z-index:20;height:var(--barra);
+  display:flex;align-items:center;justify-content:space-between;padding:0 18px;
+  background:rgba(250,249,245,.94);border-bottom:1px solid var(--linea);
+}
+.monograma{font-family:var(--caligrafia);font-size:1.75rem;line-height:1;text-decoration:none;color:var(--bosque);padding-top:4px}
+.menu-boton{
+  display:flex;align-items:center;gap:10px;background:none;border:1px solid var(--linea);border-radius:999px;
+  padding:8px 16px 8px 14px;cursor:pointer;font-weight:600;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+}
+.menu-boton:hover{border-color:var(--malva)}
+.menu-boton .rayas{display:grid;gap:4px;width:16px}
+.menu-boton .rayas i{display:block;height:1.5px;background:var(--tinta);transition:transform .2s,opacity .2s}
+.menu-boton[aria-expanded="true"] .rayas i:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.menu-boton[aria-expanded="true"] .rayas i:nth-child(2){opacity:0}
+.menu-boton[aria-expanded="true"] .rayas i:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.menu{
+  position:absolute;right:12px;top:calc(var(--barra) - 4px);width:min(300px,calc(100vw - 24px));
+  background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:8px;
+  box-shadow:0 18px 40px -18px rgba(77,70,41,.45);
+  max-height:calc(100vh - var(--barra) - 16px);overflow-y:auto;
+}
+.menu[hidden]{display:none}
+.menu a{
+  display:flex;align-items:baseline;gap:12px;padding:11px 14px;border-radius:9px;text-decoration:none;
+  font-family:var(--display);font-size:1.22rem;line-height:1.2;
+}
+.menu a::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--punto,var(--oliva));flex:none;transform:translateY(-3px)}
+.menu a:hover,.menu a.activa{background:var(--crema)}
+.menu a.activa{color:var(--malva)}
+
+/* Secciones */
+section{padding:clamp(56px,12vw,92px) 0;text-align:center;scroll-margin-top:var(--barra)}
+.etiqueta{font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;font-weight:600;color:var(--oliva);margin:0 0 12px}
+.titulo{font-size:clamp(2.2rem,9vw,3rem);line-height:1.05;margin-bottom:14px}
+.titulo em{font-style:italic;color:var(--malva)}
+.sub{color:var(--tinta-suave);margin:0 auto 34px;max-width:40ch}
+.ramita{display:block;margin:0 auto 18px;width:74px;height:18px;color:var(--oliva)}
+.f-crema{background:var(--crema)}
+.f-rosa{background:var(--rosa)}
+.f-mantequilla{background:var(--mantequilla)}
+.f-bosque{background:var(--bosque);color:var(--papel)}
+.f-bosque .etiqueta{color:#D9D3A6}
+.f-bosque .sub{color:rgba(250,249,245,.78)}
+.f-bosque .ramita{color:#D9D3A6}
+
+/* Portada */
+.portada{padding:clamp(44px,11vw,80px) 0 0;overflow:hidden}
+.nombres{font-family:var(--caligrafia);font-size:clamp(4rem,19vw,7.4rem);line-height:.92;color:var(--bosque);margin:6px 0 0}
+.nombres span{display:block}
+.nombres .y{font-size:.5em;color:var(--malva);line-height:1.25}
+.fecha-portada{
+  display:flex;align-items:center;justify-content:center;gap:16px;margin:30px auto 0;
+  font-family:var(--display);font-size:1.5rem;letter-spacing:.14em;font-variant-numeric:tabular-nums lining-nums;
+}
+.fecha-portada::before,.fecha-portada::after{content:"";height:1px;width:44px;background:var(--linea)}
+.lugar-portada{margin:10px 0 0;color:var(--tinta-suave)}
+.flores{
+  display:flex;justify-content:center;margin-top:clamp(6px,3vw,24px);mix-blend-mode:multiply;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 18%);
+}
+.flores img{width:100%;max-width:720px;height:auto}
+.flores img.espejo{display:none;transform:scaleX(-1)}
+@media (min-width:900px){.flores img{width:50%}.flores img.espejo{display:block}}
+
+/* Cuenta regresiva y calendario */
+.cuenta{display:flex;justify-content:center;gap:clamp(18px,7vw,44px);margin:0 0 42px}
+.cuenta b{
+  display:block;font-family:var(--display);font-weight:400;font-size:clamp(3.4rem,17vw,5.6rem);line-height:.95;
+  font-variant-numeric:tabular-nums lining-nums;
+}
+.cuenta span{font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;font-weight:600;color:#D9D3A6}
+.calendario{max-width:360px;margin:0 auto}
+.calendario h3{font-size:1.3rem;letter-spacing:.3em;text-transform:uppercase;padding-bottom:10px;border-bottom:1px solid rgba(250,249,245,.4);margin-bottom:8px}
+.rejilla{display:grid;grid-template-columns:repeat(7,1fr);row-gap:2px;font-variant-numeric:tabular-nums}
+.rejilla .dia-nombre{font-size:.72rem;letter-spacing:.06em;font-weight:600;color:#D9D3A6;padding:6px 0}
+.rejilla .dia{position:relative;padding:9px 0;font-size:.98rem}
+.rejilla .gran-dia{font-weight:600}
+.rejilla .gran-dia svg{position:absolute;left:50%;top:50%;width:50px;height:46px;transform:translate(-50%,-52%);overflow:visible}
+.rejilla .gran-dia path{fill:none;stroke:#F6CFCA;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:140;stroke-dashoffset:0;animation:trazo 1.6s ease-out .4s backwards}
+@keyframes trazo{from{stroke-dashoffset:140}}
+
+/* Ceremonia */
+.ficha{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin:0 auto 30px;max-width:520px}
+.ficha > div:not(.centro){padding:0 8px}
+.ficha .num{font-family:var(--display);font-size:clamp(2.2rem,9.5vw,3.6rem);line-height:1;font-variant-numeric:lining-nums}
+.ficha small{display:block;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--oliva);font-weight:600;margin-top:4px}
+.ficha .centro{border-left:1px solid var(--linea);border-right:1px solid var(--linea);padding:8px 16px;max-width:210px}
+.ficha .centro b{font-family:var(--display);font-weight:500;font-size:1.3rem;display:block;line-height:1.2}
+.ficha .centro span{color:var(--tinta-suave);font-size:.9rem;line-height:1.4;display:block;margin-top:4px}
+.boton{
+  display:inline-block;font-family:var(--texto);font-weight:600;font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;
+  text-decoration:none;color:var(--papel);background:var(--bosque);padding:15px 28px;border-radius:999px;border:0;transition:background .2s;
+}
+a.boton:hover{background:var(--malva)}
+.boton.apagado{background:transparent;color:inherit;border:1px dashed currentColor;opacity:.8}
+
+/* Programa: línea central con momentos alternados */
+.programa{list-style:none;margin:0 auto;padding:0;max-width:460px;position:relative}
+.programa::before{content:"";position:absolute;left:50%;top:6px;bottom:6px;width:1px;background:var(--malva);opacity:.5}
+.programa li{display:grid;grid-template-columns:1fr 1fr;position:relative;padding-bottom:26px}
+.programa li:last-child{padding-bottom:0}
+.programa li::before{content:"";position:absolute;left:50%;top:10px;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:var(--malva)}
+.momento{padding:0 22px;text-align:right}
+.programa li:nth-child(even) .momento{grid-column:2;text-align:left}
+.momento svg{width:30px;height:30px;color:var(--bosque);display:inline-block;margin-bottom:2px}
+.momento time{display:block;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--malva);font-variant-numeric:tabular-nums}
+.momento h3{font-size:1.4rem;line-height:1.15;margin-top:2px}
+.momento p{margin:2px 0 0;font-size:.88rem;line-height:1.4;color:var(--tinta-suave)}
+
+/* Foto principal */
+.foto-portada{
+  width:min(80%,340px);margin:28px auto 0;aspect-ratio:3/4;border-radius:999px 999px 10px 10px;overflow:hidden;
+  box-shadow:0 0 0 6px var(--papel),0 0 0 7px var(--linea);
+}
+.foto-portada img{width:100%;height:100%;object-fit:cover}
+
+/* Historia: galería */
+.galeria{columns:2;column-gap:10px;margin:0 0 30px}
+@media (min-width:560px){.galeria{columns:3}}
+.galeria button{display:block;width:100%;padding:0;margin:0 0 10px;border:0;background:var(--crema);border-radius:8px;overflow:hidden;cursor:zoom-in;break-inside:avoid}
+.galeria img{width:100%;height:auto;transition:transform .5s ease}
+.galeria button:hover img{transform:scale(1.03)}
+.visor{position:fixed;inset:0;z-index:40;background:rgba(40,38,22,.93);display:flex;align-items:center;justify-content:center;padding:56px 14px 20px}
+.visor[hidden]{display:none}
+.visor img{max-width:100%;max-height:100%;border-radius:6px}
+.visor button{position:absolute;top:10px;right:12px;background:none;border:1px solid rgba(250,249,245,.5);color:var(--papel);border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:600;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}
+.nota{
+  display:inline-block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
+  color:var(--malva);background:rgba(246,207,202,.6);padding:4px 12px;border-radius:999px;
+}
+.f-bosque .nota{color:var(--bosque);background:#F6CFCA}
+
+/* Lista de deseos */
+.medios{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;text-align:left}
+.medio{background:var(--papel);border-radius:14px;padding:18px 16px 16px;border-top:3px solid var(--color,var(--oliva))}
+.medio h3{font-size:1.35rem;line-height:1.1}
+.medio small{display:block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--tinta-suave);margin:2px 0 12px}
+.medio p{margin:0;font-size:.9rem;color:var(--tinta-suave);border-top:1px dashed var(--linea);padding-top:10px}
+@media (max-width:380px){.medios{grid-template-columns:1fr}}
+
+/* Preguntas */
+.preguntas{text-align:left;max-width:520px;margin:0 auto}
+.preguntas details{border-bottom:1px solid var(--linea)}
+.preguntas summary{
+  cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px;
+  font-family:var(--display);font-size:1.3rem;line-height:1.25;padding:16px 2px;
+}
+.preguntas summary::-webkit-details-marker{display:none}
+.preguntas summary::after{content:"+";font-family:var(--texto);font-weight:300;font-size:1.4rem;color:var(--malva);transition:transform .2s}
+.preguntas details[open] summary::after{transform:rotate(45deg)}
+.preguntas details p{margin:0 2px 18px;color:var(--tinta-suave)}
+
+/* Cierre */
+.cierre{padding-bottom:0;overflow:hidden}
+.cierre .gracias{font-family:var(--display);font-size:clamp(1.5rem,6.4vw,2rem);line-height:1.3;margin:0 auto;max-width:20ch}
+.cierre .firma{font-family:var(--caligrafia);font-size:2.6rem;line-height:1.1;color:var(--bosque);margin:18px 0 0}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rejilla .gran-dia path{animation:none}
+  *{transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ramita" viewBox="0 0 74 18"><g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"><path d="M2 9h70"/><path d="M26 9c2-5 6-6 9-6-1 4-4 6-9 6zM48 9c-2 5-6 6-9 6 1-4 4-6 9-6zM14 9c1-3 4-4 6-4-1 3-3 4-6 4zM60 9c-1 3-4 4-6 4 1-3 3-4 6-4z"/></g></symbol>
+</svg>
+
+<div class="barra">
+  <a class="monograma" href="#inicio" data-ir="inicio" aria-label="Ir al inicio">A &amp; D</a>
+  <button class="menu-boton" id="menu-boton" type="button" aria-expanded="false" aria-controls="menu">
+    <span class="rayas" aria-hidden="true"><i></i><i></i><i></i></span>Menú
+  </button>
+  <nav class="menu" id="menu" hidden aria-label="Secciones">
+    <a href="#inicio" data-ir="inicio">Inicio</a>
+    <a href="#cuenta" data-ir="cuenta" style="--punto:var(--bosque)">Cuenta regresiva</a>
+    <a href="#ceremonia" data-ir="ceremonia">Ceremonia y recepción</a>
+    <a href="#programa" data-ir="programa" style="--punto:var(--malva)">Programa</a>
+    <a href="#historia" data-ir="historia" style="--punto:var(--durazno)">Nuestra historia</a>
+    <a href="#vestimenta" data-ir="vestimenta">Código de vestimenta</a>
+    <a href="#deseos" data-ir="deseos" style="--punto:var(--malva)">Lista de deseos</a>
+    <a href="#preguntas" data-ir="preguntas" style="--punto:var(--durazno)">Preguntas frecuentes</a>
+    <a href="#asistencia" data-ir="asistencia" style="--punto:var(--bosque)">Confirmar asistencia</a>
+  </nav>
+</div>
+
+<main>
+  <section class="portada" id="inicio">
+    <div class="envoltura">
+      <p class="etiqueta">Nos casamos</p>
+      <h1 class="nombres"><span>Ana María</span><span class="y">&amp;</span><span>Daniel</span></h1>
+      <div class="foto-portada"><img src="portada.jpg" alt="Ana María y Daniel al atardecer en el desierto, junto a un dromedario" width="1100" height="1467"></div>
+      <p class="fecha-portada">04 · 09 · 2027</p>
+      <p class="lugar-portada">Club Campestre El Rancho · Bogotá</p>
+    </div>
+    <div class="flores" aria-hidden="true">
+      <img src="flores.jpg" alt="" width="1414" height="906">
+      <img class="espejo" src="flores.jpg" alt="" width="1414" height="906">
+    </div>
+  </section>
+
+  <section id="cuenta" class="f-bosque">
+    <div class="envoltura">
+      <svg class="ramita" aria-hidden="true"><use href="#ramita"/></svg>
+      <p class="etiqueta">Sábado 4 de septiembre</p>
+      <h2 class="titulo" id="titulo-cuenta">Falta muy poco</h2>
+      <p class="sub">Contamos los días para celebrar con ustedes.</p>
+      <div class="cuenta" role="group" aria-labelledby="titulo-cuenta">
+        <div><b id="c-dias">–</b><span>Días</span></div>
+        <div><b id="c-horas">–</b><span>Horas</span></div>
+        <div><b id="c-min">–</b><span>Minutos</span></div>
+      </div>
+      <div class="calendario">
+        <h3>Septiembre</h3>
+        <div class="rejilla" id="rejilla"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ceremonia">
+    <div class="envoltura">
+      <svg class="ramita" aria-hidden="true"><use href="#ramita"/></svg>
+      <p class="etiqueta">Dónde y cuándo</p>
+      <h2 class="titulo">Ceremonia <em>y</em> recepción</h2>
+      <p class="sub">Todo ocurre en el mismo lugar: la ceremonia en la iglesia del club y, después, la celebración.</p>
+      <div class="ficha">
+        <div><span class="num">04</span><small>Septiembre</small></div>
+        <div class="centro"><b>Club Campestre El Rancho</b><span>Iglesia del club<br>Bogotá, Colombia</span></div>
+        <div><span class="num">3:30</span><small>p.&nbsp;m.</small></div>
+      </div>
+      <a class="boton" href="https://www.google.com/maps/search/?api=1&query=Club+Campestre+El+Rancho+Bogot%C3%A1" target="_blank" rel="noopener">Cómo llegar</a>
+    </div>
+  </section>
+
+  <section id="programa" class="f-rosa">
+    <div class="envoltura">
+      <svg class="ramita" aria-hidden="true"><use href="#ramita"/></svg>
+      <p class="etiqueta">Sábado 04.09.2027</p>
+      <h2 class="titulo">Programa</h2>
+      <p class="sub">Así será nuestro día.</p>
+      <ol class="programa">
+        <li><div class="momento">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="12" cy="19" r="7"/><circle cx="20" cy="19" r="7"/><path d="M9.5 8.5 12 5l2.5 3.5L12 11z"/></svg>
+          <time>3:30 p. m.</time><h3>Ceremonia</h3><p>Iglesia del club, con músicos en vivo</p></div></li>
+        <li><div class="momento">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true"><path d="M7 5h8l-1 8a3 3 0 0 1-6 0zM11 16v9M8 26h6M17 8h8l-1 7a3 3 0 0 1-6 0zM21 18v7M18 26h6"/></svg>
+          <time>5:00 p. m.</time><h3>Recepción y coctel</h3></div></li>
+        <li><div class="momento">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="16" r="7"/><circle cx="16" cy="16" r="3.4"/><path d="M5 6v8a2 2 0 0 0 2 2v10M5 6v6M9 6v8a2 2 0 0 1-2 2M27 26V6c-2 2-3 5-3 9h3"/></svg>
+          <time>6:30 p. m.</time><h3>Cena</h3></div></li>
+        <li><div class="momento">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 23V8l12-3v15"/><ellipse cx="9" cy="23" rx="3.2" ry="2.5"/><ellipse cx="21" cy="20" rx="3.2" ry="2.5"/><path d="M12 12l12-3"/></svg>
+          <time>7:30 p. m.</time><h3>Fiesta</h3><p>A bailar</p></div></li>
+        <li><div class="momento">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 20a10 10 0 0 1-11-13 10 10 0 1 0 13 12 9 9 0 0 1-2 1z"/><path d="M23 6v4M21 8h4"/></svg>
+          <time>12:30 a. m.</time><h3>Fin de la celebración</h3></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="historia">
+    <div class="envoltura">
+      <svg class="ramita" aria-hidden="true"><use href="#ramita"/></svg>
+      <p class="etiqueta">Ana María y Daniel</p>
+      <h2 class="titulo">Nuestra <em>historia</em></h2>
+      <p class="sub">Cómo nos conocimos y todo lo que nos trajo hasta aquí.</p>
+      <div class="galeria" id="galeria">
+        <button type="button" aria-label="Ampliar foto"><img src="foto-03.jpg" alt="Ana María y Daniel" width="800" height="1421" loading="lazy"></button>
+        <button type="button" aria-label="Ampliar foto"><img src="foto-06.jpg" alt="Ana María y Daniel" width="800" height="1067" loading="lazy"></button>
+        <button type="button" aria-label="Ampliar foto"><img src="foto-04.jpg" alt="Anillo de compromiso en la mano de Ana María, con el desierto de fondo" width="800" height="1067" loading="lazy"></button>
+        <button type="button" aria-label="Ampliar foto"><img src="foto-01.jpg" alt="Ana María y Daniel" width="800" height="1067" loading="lazy"></button>
+        <button type="button" aria-label="Ampliar foto"><img src="foto-12.jpg" alt="Ana María y Daniel" width="800" height="600" loading="lazy"></button>
+        <button type="button" aria-label="Ampliar foto"><img src="foto-02.jpg" alt="Ana María y Daniel" width="800" height="1421" loading="lazy"></button>
+        <button type="button" aria-label="Ampliar foto"><img src="foto-07.jpg" alt="Ana María y Daniel" width="800" height="1067" loading="lazy"></button>
+        <button type="button" aria-label="Ampliar foto"><img src="foto-05.jpg" alt="Ana María y Daniel" width="800" height="1421" loading="lazy"></button>
+        <button type="button" aria-label="Ampliar foto"><img src="foto-09.jpg" alt="Ana María y Daniel" width="800" height="1067" loading="lazy"></button>
+        <button type="button" aria-label="Ampliar foto"><img src="foto-10.jpg" alt="Ana María y Daniel" width="800" height="1067" loading="lazy"></button>
+        <button type="button" aria-label="Ampliar foto"><img src="foto-08.jpg" alt="Ana María y Daniel" width="800" height="1067" loading="lazy"></button>
+        <button type="button" aria-label="Ampliar foto"><img src="foto-11.jpg" alt="Ana María y Daniel" width="800" height="1067" loading="lazy"></button>
+      </div>
+      <span class="nota">Texto de nuestra historia por agregar</span>
+    </div>
+  </section>
+
+  <section id="vestimenta" class="f-mantequilla">
+    <div class="envoltura">
+      <svg class="ramita" aria-hidden="true"><use href="#ramita"/></svg>
+      <p class="etiqueta">Qué ponerse</p>
+      <h2 class="titulo">Código de <em>vestimenta</em></h2>
+      <p class="sub">Una tarde campestre que termina en fiesta. Pronto compartiremos las indicaciones.</p>
+      <span class="nota">Por definir</span>
+    </div>
+  </section>
+
+  <section id="deseos" class="f-crema">
+    <div class="envoltura">
+      <svg class="ramita" aria-hidden="true"><use href="#ramita"/></svg>
+      <p class="etiqueta">Regalos</p>
+      <h2 class="titulo">Lista de <em>deseos</em></h2>
+      <p class="sub">Su presencia es nuestro mejor regalo. Si quieren tener un detalle con nosotros, pueden hacerlo por transferencia.</p>
+      <div class="medios">
+        <article class="medio" style="--color:var(--malva)"><h3>Nequi</h3><small>Colombia</small><p>Dato por confirmar</p></article>
+        <article class="medio" style="--color:var(--durazno)"><h3>Bre-B</h3><small>Colombia · llave</small><p>Dato por confirmar</p></article>
+        <article class="medio" style="--color:var(--oliva)"><h3>Bizum</h3><small>España</small><p>Dato por confirmar</p></article>
+        <article class="medio" style="--color:var(--bosque)"><h3>Cuenta bancaria</h3><small>Transferencia</small><p>Dato por confirmar</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="preguntas">
+    <div class="envoltura">
+      <svg class="ramita" aria-hidden="true"><use href="#ramita"/></svg>
+      <p class="etiqueta">Antes de venir</p>
+      <h2 class="titulo">Preguntas <em>frecuentes</em></h2>
+      <p class="sub">Estamos definiendo estos detalles. Toquen cada pregunta para ver la respuesta.</p>
+      <div class="preguntas">
+        <details><summary>¿Puedo llevar acompañante?</summary><p>Por definir.</p></details>
+        <details><summary>¿Pueden asistir niños?</summary><p>Por definir.</p></details>
+        <details><summary>¿Hay parqueadero en el club?</summary><p>Por definir.</p></details>
+        <details><summary>¿Habrá transporte para los invitados?</summary><p>Por definir.</p></details>
+        <details><summary>¿Dónde puedo hospedarme?</summary><p>Por definir.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="asistencia" class="f-bosque">
+    <div class="envoltura">
+      <svg class="ramita" aria-hidden="true"><use href="#ramita"/></svg>
+      <p class="etiqueta">Los esperamos</p>
+      <h2 class="titulo">Confirmar asistencia</h2>
+      <p class="sub">Les agradecemos avisarnos si nos acompañan, para preparar ese día con todo el cariño.</p>
+      <p style="margin:0 0 22px"><span class="nota">Fecha límite por confirmar</span></p>
+      <span class="boton apagado">Formulario disponible pronto</span>
+    </div>
+  </section>
+
+  <section class="cierre">
+    <div class="envoltura">
+      <p class="gracias">¡Gracias por acompañarnos en este día tan especial para nosotros!</p>
+      <p class="firma">Ana María y Daniel</p>
+    </div>
+    <div class="flores" aria-hidden="true">
+      <img src="flores.jpg" alt="" width="1414" height="906">
+      <img class="espejo" src="flores.jpg" alt="" width="1414" height="906">
+    </div>
+  </section>
+</main>
+
+<div class="visor" id="visor" hidden role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <button type="button" id="visor-cerrar">Cerrar</button>
+  <img id="visor-img" src="" alt="">
+</div>
+
+<script>
+(function(){
+  // Ceremonia: 4 de septiembre de 2027, 3:30 p. m., hora de Colombia (UTC-5)
+  var boda = new Date("2027-09-04T15:30:00-05:00").getTime();
+  var d = document.getElementById("c-dias"), h = document.getElementById("c-horas"), m = document.getElementById("c-min");
+  function pinta(){
+    var falta = boda - Date.now();
+    if (falta <= 0){ d.textContent = "0"; h.textContent = "00"; m.textContent = "00";
+      document.getElementById("titulo-cuenta").textContent = "¡Llegó el día!"; return; }
+    var min = Math.floor(falta / 60000);
+    d.textContent = Math.floor(min / 1440);
+    h.textContent = String(Math.floor(min % 1440 / 60)).padStart(2, "0");
+    m.textContent = String(min % 60).padStart(2, "0");
+  }
+  pinta(); setInterval(pinta, 20000);
+
+  // Calendario de septiembre de 2027 (semana desde el domingo)
+  var r = document.getElementById("rejilla"), html = "";
+  ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"].forEach(function(n){ html += '<div class="dia-nombre">' + n + '</div>'; });
+  var inicio = new Date(2027, 8, 1).getDay();
+  for (var i = 0; i < inicio; i++) html += "<div></div>";
+  for (var dia = 1; dia <= 30; dia++){
+    if (dia === 4){
+      html += '<div class="dia gran-dia" aria-label="4 de septiembre, día de la boda">4<svg viewBox="0 0 50 46" aria-hidden="true"><path d="M25 41C10 31 3 22 6 12c3-8 13-9 19 1 6-10 17-9 20-1 3 10-5 19-20 29-1 .6-2-.6-3-2"/></svg></div>';
+    } else html += '<div class="dia">' + dia + '</div>';
+  }
+  r.innerHTML = html;
+
+  // Menú desplegable
+  var boton = document.getElementById("menu-boton"), menu = document.getElementById("menu");
+  function abre(si){ menu.hidden = !si; boton.setAttribute("aria-expanded", String(si)); }
+  boton.addEventListener("click", function(e){ e.stopPropagation(); abre(menu.hidden); });
+  document.addEventListener("click", function(e){ if (!menu.hidden && !menu.contains(e.target)) abre(false); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !menu.hidden){ abre(false); boton.focus(); } });
+  document.querySelectorAll("[data-ir]").forEach(function(a){
+    a.addEventListener("click", function(e){
+      var destino = document.getElementById(a.dataset.ir);
+      if (!destino) return;
+      e.preventDefault(); abre(false);
+      destino.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
+    });
+  });
+
+  // Visor de fotos
+  var visor = document.getElementById("visor"), vimg = document.getElementById("visor-img"), origen = null;
+  function cierraVisor(){ visor.hidden = true; vimg.removeAttribute("src"); if (origen) origen.focus(); }
+  document.getElementById("galeria").addEventListener("click", function(e){
+    var b = e.target.closest("button"); if (!b) return;
+    var im = b.querySelector("img"); origen = b;
+    vimg.src = im.getAttribute("src"); vimg.alt = im.alt; visor.hidden = false;
+    document.getElementById("visor-cerrar").focus();
+  });
+  visor.addEventListener("click", cierraVisor);
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !visor.hidden) cierraVisor(); });
+
+  // Resalta en el menú la sección visible
+  if ("IntersectionObserver" in window){
+    var enlaces = {};
+    menu.querySelectorAll("a").forEach(function(a){ enlaces[a.dataset.ir] = a; });
+    var obs = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(en){
+        if (en.isIntersecting){
+          Object.keys(enlaces).forEach(function(k){ enlaces[k].classList.toggle("activa", k === en.target.id); });
+        }
+      });
+    }, {rootMargin: "-45% 0px -50% 0px"});
+    document.querySelectorAll("main section[id]").forEach(function(s){ obs.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
