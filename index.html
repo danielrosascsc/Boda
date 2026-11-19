@@ -6,7 +6,7 @@
 <title>Ana María & Daniel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Mulish:wght@300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 /* Plan: un jardín en bloques de color. Cada sección toma un tono de las flores
    de la invitación (papel, oliva profundo, rosa, mantequilla, malva) y se
@@ -25,9 +25,9 @@
   --malva:#B46F74;
   --durazno:#E99560;
   --linea:rgba(77,70,41,.22);
-  --caligrafia:"Pinyon Script","Snell Roundhand","Apple Chancery",cursive;
+  --caligrafia:"Cormorant Garamond","Times New Roman",serif;
   --display:"Cormorant Garamond","Cormorant","Times New Roman",serif;
-  --texto:"Mulish","Helvetica Neue",Arial,sans-serif;
+  --texto:"EB Garamond","Garamond","Times New Roman",serif;
   --ancho:640px;
   --barra:56px;
 }
@@ -35,7 +35,7 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;background:var(--papel);color:var(--tinta);
-  font-family:var(--texto);font-weight:300;font-size:17px;line-height:1.65;
+  font-family:var(--texto);font-weight:400;font-size:18px;line-height:1.6;
 }
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -50,7 +50,8 @@ h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
   display:flex;align-items:center;justify-content:space-between;padding:0 18px;
   background:rgba(250,249,245,.94);border-bottom:1px solid var(--linea);
 }
-.monograma{font-family:var(--caligrafia);font-size:1.75rem;line-height:1;text-decoration:none;color:var(--bosque);padding-top:4px}
+.monograma{font-family:var(--display);font-weight:500;font-size:1.45rem;letter-spacing:.06em;line-height:1;text-decoration:none;color:var(--tinta)}
+.monograma i{font-style:italic;font-weight:400;color:var(--oliva)}
 .menu-boton{
   display:flex;align-items:center;gap:10px;background:none;border:1px solid var(--linea);border-radius:999px;
   padding:8px 16px 8px 14px;cursor:pointer;font-weight:600;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
@@ -79,9 +80,9 @@ h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
 /* Secciones */
 section{padding:clamp(56px,12vw,92px) 0;text-align:center;scroll-margin-top:var(--barra)}
 .etiqueta{font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;font-weight:600;color:var(--oliva);margin:0 0 12px}
-.titulo{font-size:clamp(2.2rem,9vw,3rem);line-height:1.05;margin-bottom:14px}
-.titulo em{font-style:italic;color:var(--malva)}
-.sub{color:var(--tinta-suave);margin:0 auto 34px;max-width:40ch}
+.titulo{font-size:clamp(1.6rem,6.6vw,2.1rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase;line-height:1.2;margin-bottom:14px}
+.titulo em{font-style:normal;color:inherit}
+.sub{color:var(--tinta-suave);font-style:italic;margin:0 auto 34px;max-width:40ch}
 .ramita{display:block;margin:0 auto 18px;width:74px;height:18px;color:var(--oliva)}
 .f-crema{background:var(--crema)}
 .f-rosa{background:var(--rosa)}
@@ -93,9 +94,9 @@ section{padding:clamp(56px,12vw,92px) 0;text-align:center;scroll-margin-top:var(
 
 /* Portada */
 .portada{padding:clamp(44px,11vw,80px) 0 0;overflow:hidden}
-.nombres{font-family:var(--caligrafia);font-size:clamp(4rem,19vw,7.4rem);line-height:.92;color:var(--bosque);margin:6px 0 0}
+.nombres{font-family:var(--display);font-weight:500;font-size:clamp(3.2rem,15vw,5.6rem);line-height:1;letter-spacing:-.01em;color:var(--tinta);margin:10px 0 0}
 .nombres span{display:block}
-.nombres .y{font-size:.5em;color:var(--malva);line-height:1.25}
+.nombres .y{font-style:italic;font-weight:400;font-size:.85em;color:var(--oliva);line-height:1}
 .fecha-portada{
   display:flex;align-items:center;justify-content:center;gap:16px;margin:30px auto 0;
   font-family:var(--display);font-size:1.5rem;letter-spacing:.14em;font-variant-numeric:tabular-nums lining-nums;
@@ -116,7 +117,7 @@ section{padding:clamp(56px,12vw,92px) 0;text-align:center;scroll-margin-top:var(
 .detalle{padding:4px 10px;display:flex;flex-direction:column;align-items:center}
 .detalle + .detalle{border-left:1px solid var(--linea)}
 .detalle svg{width:30px;height:30px;color:var(--oliva);margin-bottom:10px}
-.detalle small{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--oliva)}
+.detalle small{font-size:.66rem;letter-spacing:.12em;line-height:1.35;text-transform:uppercase;font-weight:600;color:var(--oliva)}
 .detalle h3{font-size:clamp(1.05rem,4.6vw,1.35rem);line-height:1.2;margin:6px 0 6px}
 .detalle p{margin:0;font-family:var(--display);font-style:italic;font-size:clamp(.9rem,3.8vw,1rem);line-height:1.3;color:var(--tinta-suave)}
 .adorno{display:flex;align-items:center;justify-content:center;gap:8px;margin:-4px 0 30px;color:var(--oliva)}
@@ -190,7 +191,7 @@ a.boton:hover{background:var(--malva)}
 /* Cierre */
 .cierre{padding-bottom:0;overflow:hidden}
 .cierre .gracias{font-family:var(--display);font-size:clamp(1.5rem,6.4vw,2rem);line-height:1.3;margin:0 auto;max-width:20ch}
-.cierre .firma{font-family:var(--caligrafia);font-size:2.6rem;line-height:1.1;color:var(--bosque);margin:18px 0 0}
+.cierre .firma{font-family:var(--display);font-style:italic;font-size:2.1rem;line-height:1.1;color:var(--tinta);margin:18px 0 0}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -206,7 +207,7 @@ a.boton:hover{background:var(--malva)}
 </svg>
 
 <div class="barra">
-  <a class="monograma" href="#inicio" data-ir="inicio" aria-label="Ir al inicio">A &amp; D</a>
+  <a class="monograma" href="#inicio" data-ir="inicio" aria-label="Ir al inicio">A <i>&amp;</i> D</a>
   <button class="menu-boton" id="menu-boton" type="button" aria-expanded="false" aria-controls="menu">
     <span class="rayas" aria-hidden="true"><i></i><i></i><i></i></span>Menú
   </button>
