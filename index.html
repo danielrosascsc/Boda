@@ -111,31 +111,17 @@ section{padding:clamp(56px,12vw,92px) 0;text-align:center;scroll-margin-top:var(
 .flores img.espejo{display:none;transform:scaleX(-1)}
 @media (min-width:900px){.flores img{width:50%}.flores img.espejo{display:block}}
 
-/* Cuenta regresiva y calendario */
-.cuenta{display:flex;justify-content:center;gap:clamp(18px,7vw,44px);margin:0 0 42px}
-.cuenta b{
-  display:block;font-family:var(--display);font-weight:400;font-size:clamp(3.4rem,17vw,5.6rem);line-height:.95;
-  font-variant-numeric:tabular-nums lining-nums;
-}
-.cuenta span{font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;font-weight:600;color:#D9D3A6}
-.calendario{max-width:360px;margin:0 auto}
-.calendario h3{font-size:1.3rem;letter-spacing:.3em;text-transform:uppercase;padding-bottom:10px;border-bottom:1px solid rgba(250,249,245,.4);margin-bottom:8px}
-.rejilla{display:grid;grid-template-columns:repeat(7,1fr);row-gap:2px;font-variant-numeric:tabular-nums}
-.rejilla .dia-nombre{font-size:.72rem;letter-spacing:.06em;font-weight:600;color:#D9D3A6;padding:6px 0}
-.rejilla .dia{position:relative;padding:9px 0;font-size:.98rem}
-.rejilla .gran-dia{font-weight:600}
-.rejilla .gran-dia svg{position:absolute;left:50%;top:50%;width:50px;height:46px;transform:translate(-50%,-52%);overflow:visible}
-.rejilla .gran-dia path{fill:none;stroke:#F6CFCA;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:140;stroke-dashoffset:0;animation:trazo 1.6s ease-out .4s backwards}
-@keyframes trazo{from{stroke-dashoffset:140}}
-
-/* Ceremonia */
-.ficha{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin:0 auto 30px;max-width:520px}
-.ficha > div:not(.centro){padding:0 8px}
-.ficha .num{font-family:var(--display);font-size:clamp(2.2rem,9.5vw,3.6rem);line-height:1;font-variant-numeric:lining-nums}
-.ficha small{display:block;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--oliva);font-weight:600;margin-top:4px}
-.ficha .centro{border-left:1px solid var(--linea);border-right:1px solid var(--linea);padding:8px 16px;max-width:210px}
-.ficha .centro b{font-family:var(--display);font-weight:500;font-size:1.3rem;display:block;line-height:1.2}
-.ficha .centro span{color:var(--tinta-suave);font-size:.9rem;line-height:1.4;display:block;margin-top:4px}
+/* Los detalles: tres columnas con líneas finas, como una invitación impresa */
+.detalles{display:grid;grid-template-columns:repeat(3,1fr);margin:6px 0 34px}
+.detalle{padding:4px 10px;display:flex;flex-direction:column;align-items:center}
+.detalle + .detalle{border-left:1px solid var(--linea)}
+.detalle svg{width:30px;height:30px;color:var(--oliva);margin-bottom:10px}
+.detalle small{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--oliva)}
+.detalle h3{font-size:clamp(1.05rem,4.6vw,1.35rem);line-height:1.2;margin:6px 0 6px}
+.detalle p{margin:0;font-family:var(--display);font-style:italic;font-size:clamp(.9rem,3.8vw,1rem);line-height:1.3;color:var(--tinta-suave)}
+.adorno{display:flex;align-items:center;justify-content:center;gap:8px;margin:-4px 0 30px;color:var(--oliva)}
+.adorno::before,.adorno::after{content:"";height:1px;width:34px;background:currentColor;opacity:.6}
+.adorno i{width:5px;height:5px;border-radius:50%;background:currentColor}
 .boton{
   display:inline-block;font-family:var(--texto);font-weight:600;font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;
   text-decoration:none;color:var(--papel);background:var(--bosque);padding:15px 28px;border-radius:999px;border:0;transition:background .2s;
@@ -143,18 +129,20 @@ section{padding:clamp(56px,12vw,92px) 0;text-align:center;scroll-margin-top:var(
 a.boton:hover{background:var(--malva)}
 .boton.apagado{background:transparent;color:inherit;border:1px dashed currentColor;opacity:.8}
 
-/* Programa: línea central con momentos alternados */
-.programa{list-style:none;margin:0 auto;padding:0;max-width:460px;position:relative}
-.programa::before{content:"";position:absolute;left:50%;top:6px;bottom:6px;width:1px;background:var(--malva);opacity:.5}
-.programa li{display:grid;grid-template-columns:1fr 1fr;position:relative;padding-bottom:26px}
-.programa li:last-child{padding-bottom:0}
-.programa li::before{content:"";position:absolute;left:50%;top:10px;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:var(--malva)}
-.momento{padding:0 22px;text-align:right}
-.programa li:nth-child(even) .momento{grid-column:2;text-align:left}
-.momento svg{width:30px;height:30px;color:var(--bosque);display:inline-block;margin-bottom:2px}
-.momento time{display:block;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--malva);font-variant-numeric:tabular-nums}
-.momento h3{font-size:1.4rem;line-height:1.15;margin-top:2px}
-.momento p{margin:2px 0 0;font-size:.88rem;line-height:1.4;color:var(--tinta-suave)}
+/* Programa: línea horizontal con círculos */
+.dia-linea{list-style:none;margin:0 auto;padding:0;max-width:600px;display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.dia-linea::before{content:"";position:absolute;top:28px;left:10%;right:10%;height:1px;background:var(--oliva);opacity:.45}
+.dia-linea li{position:relative;display:flex;flex-direction:column;align-items:center;padding:0 2px}
+.dia-linea li:not(:last-child)::after{content:"";position:absolute;top:26px;right:-2.5px;width:5px;height:5px;border-radius:50%;background:var(--oliva)}
+.circulo{
+  width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;
+  background:var(--rosa);color:var(--bosque);box-shadow:0 0 0 5px var(--crema);
+}
+.circulo svg{width:28px;height:28px}
+.dia-linea time{display:block;margin-top:14px;font-family:var(--display);font-size:clamp(1.2rem,5vw,1.4rem);line-height:1;font-weight:500;font-variant-numeric:lining-nums}
+.dia-linea time span{display:block;font-family:var(--texto);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--malva);margin-top:5px}
+.dia-linea h3{font-family:var(--texto);font-weight:400;font-size:clamp(.72rem,3vw,.88rem);line-height:1.3;margin-top:6px;color:var(--tinta-suave)}
+@media (max-width:380px){.circulo{width:48px;height:48px}.circulo svg{width:24px;height:24px}.dia-linea::before{top:24px}.dia-linea li:not(:last-child)::after{top:22px}}
 
 /* Foto principal */
 .foto-portada{
@@ -224,8 +212,7 @@ a.boton:hover{background:var(--malva)}
   </button>
   <nav class="menu" id="menu" hidden aria-label="Secciones">
     <a href="#inicio" data-ir="inicio">Inicio</a>
-    <a href="#cuenta" data-ir="cuenta" style="--punto:var(--bosque)">Cuenta regresiva</a>
-    <a href="#ceremonia" data-ir="ceremonia">Ceremonia y recepción</a>
+    <a href="#detalles" data-ir="detalles" style="--punto:var(--bosque)">Los detalles</a>
     <a href="#programa" data-ir="programa" style="--punto:var(--malva)">Programa</a>
     <a href="#historia" data-ir="historia" style="--punto:var(--durazno)">Nuestra historia</a>
     <a href="#vestimenta" data-ir="vestimenta">Código de vestimenta</a>
@@ -250,61 +237,43 @@ a.boton:hover{background:var(--malva)}
     </div>
   </section>
 
-  <section id="cuenta" class="f-bosque">
+  <section id="detalles">
     <div class="envoltura">
       <svg class="ramita" aria-hidden="true"><use href="#ramita"/></svg>
-      <p class="etiqueta">Sábado 4 de septiembre</p>
-      <h2 class="titulo" id="titulo-cuenta">Falta muy poco</h2>
-      <p class="sub">Contamos los días para celebrar con ustedes.</p>
-      <div class="cuenta" role="group" aria-labelledby="titulo-cuenta">
-        <div><b id="c-dias">–</b><span>Días</span></div>
-        <div><b id="c-horas">–</b><span>Horas</span></div>
-        <div><b id="c-min">–</b><span>Minutos</span></div>
-      </div>
-      <div class="calendario">
-        <h3>Septiembre</h3>
-        <div class="rejilla" id="rejilla"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="ceremonia">
-    <div class="envoltura">
-      <svg class="ramita" aria-hidden="true"><use href="#ramita"/></svg>
-      <p class="etiqueta">Dónde y cuándo</p>
-      <h2 class="titulo">Ceremonia <em>y</em> recepción</h2>
-      <p class="sub">Todo ocurre en el mismo lugar: la ceremonia en la iglesia del club y, después, la celebración.</p>
-      <div class="ficha">
-        <div><span class="num">04</span><small>Septiembre</small></div>
-        <div class="centro"><b>Club Campestre El Rancho</b><span>Iglesia del club<br>Bogotá, Colombia</span></div>
-        <div><span class="num">3:30</span><small>p.&nbsp;m.</small></div>
+      <p class="etiqueta">Con mucha alegría</p>
+      <h2 class="titulo">Los detalles</h2>
+      <div class="adorno" aria-hidden="true"><i></i></div>
+      <div class="detalles">
+        <div class="detalle">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M16 29s9-9.2 9-16a9 9 0 0 0-18 0c0 6.8 9 16 9 16z"/><circle cx="16" cy="13" r="3.4"/></svg>
+          <small>Lugar</small><h3>Club Campestre El Rancho</h3><p>Bogotá, Colombia</p>
+        </div>
+        <div class="detalle">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="12" cy="17" r="7.5"/><circle cx="20" cy="17" r="7.5"/></svg>
+          <small>Fecha</small><h3>4 de septiembre de 2027</h3><p>Sábado</p>
+        </div>
+        <div class="detalle">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true"><path d="M16 29V9"/><path d="M16 12c-4-1-6-4-6-8 4 1 6 4 6 8zM16 17c4-1 6-4 6-8-4 1-6 4-6 8zM16 22c-4-1-6-4-6-8 4 1 6 4 6 8z"/></svg>
+          <small>Ceremonia y recepción</small><h3>3:30 p.&nbsp;m.</h3><p>Iglesia del club</p>
+        </div>
       </div>
       <a class="boton" href="https://www.google.com/maps/search/?api=1&query=Club+Campestre+El+Rancho+Bogot%C3%A1" target="_blank" rel="noopener">Cómo llegar</a>
     </div>
   </section>
 
-  <section id="programa" class="f-rosa">
+  <section id="programa" class="f-crema">
     <div class="envoltura">
       <svg class="ramita" aria-hidden="true"><use href="#ramita"/></svg>
       <p class="etiqueta">Sábado 04.09.2027</p>
       <h2 class="titulo">Programa</h2>
       <p class="sub">Así será nuestro día.</p>
-      <ol class="programa">
-        <li><div class="momento">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="12" cy="19" r="7"/><circle cx="20" cy="19" r="7"/><path d="M9.5 8.5 12 5l2.5 3.5L12 11z"/></svg>
-          <time>3:30 p. m.</time><h3>Ceremonia</h3><p>Iglesia del club, con músicos en vivo</p></div></li>
-        <li><div class="momento">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true"><path d="M7 5h8l-1 8a3 3 0 0 1-6 0zM11 16v9M8 26h6M17 8h8l-1 7a3 3 0 0 1-6 0zM21 18v7M18 26h6"/></svg>
-          <time>5:00 p. m.</time><h3>Recepción y coctel</h3></div></li>
-        <li><div class="momento">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="16" r="7"/><circle cx="16" cy="16" r="3.4"/><path d="M5 6v8a2 2 0 0 0 2 2v10M5 6v6M9 6v8a2 2 0 0 1-2 2M27 26V6c-2 2-3 5-3 9h3"/></svg>
-          <time>6:30 p. m.</time><h3>Cena</h3></div></li>
-        <li><div class="momento">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 23V8l12-3v15"/><ellipse cx="9" cy="23" rx="3.2" ry="2.5"/><ellipse cx="21" cy="20" rx="3.2" ry="2.5"/><path d="M12 12l12-3"/></svg>
-          <time>7:30 p. m.</time><h3>Fiesta</h3><p>A bailar</p></div></li>
-        <li><div class="momento">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 20a10 10 0 0 1-11-13 10 10 0 1 0 13 12 9 9 0 0 1-2 1z"/><path d="M23 6v4M21 8h4"/></svg>
-          <time>12:30 a. m.</time><h3>Fin de la celebración</h3></div></li>
+      <div class="adorno" aria-hidden="true"><i></i></div>
+      <ol class="dia-linea">
+        <li><span class="circulo"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="18" r="7"/><circle cx="20" cy="18" r="7"/><path d="M9.5 7.5 12 4l2.5 3.5L12 10z"/></svg></span><time>3:30<span>p.&nbsp;m.</span></time><h3>Ceremonia</h3></li>
+        <li><span class="circulo"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 5h8l-1 8a3 3 0 0 1-6 0zM11 16v9M8 26h6M17 8h8l-1 7a3 3 0 0 1-6 0zM21 18v7M18 26h6"/></svg></span><time>5:00<span>p.&nbsp;m.</span></time><h3>Coctel</h3></li>
+        <li><span class="circulo"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="7"/><circle cx="16" cy="16" r="3.4"/><path d="M5 6v8a2 2 0 0 0 2 2v10M5 6v6M9 6v8a2 2 0 0 1-2 2M27 26V6c-2 2-3 5-3 9h3"/></svg></span><time>6:30<span>p.&nbsp;m.</span></time><h3>Cena</h3></li>
+        <li><span class="circulo"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 23V8l12-3v15"/><ellipse cx="9" cy="23" rx="3.2" ry="2.5"/><ellipse cx="21" cy="20" rx="3.2" ry="2.5"/><path d="M12 12l12-3"/></svg></span><time>7:30<span>p.&nbsp;m.</span></time><h3>Fiesta</h3></li>
+        <li><span class="circulo"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 20a10 10 0 0 1-11-13 10 10 0 1 0 13 12 9 9 0 0 1-2 1z"/><path d="M23 6v4M21 8h4"/></svg></span><time>12:30<span>a.&nbsp;m.</span></time><h3>Fin de la celebración</h3></li>
       </ol>
     </div>
   </section>
@@ -404,32 +373,6 @@ a.boton:hover{background:var(--malva)}
 
 <script>
 (function(){
-  // Ceremonia: 4 de septiembre de 2027, 3:30 p. m., hora de Colombia (UTC-5)
-  var boda = new Date("2027-09-04T15:30:00-05:00").getTime();
-  var d = document.getElementById("c-dias"), h = document.getElementById("c-horas"), m = document.getElementById("c-min");
-  function pinta(){
-    var falta = boda - Date.now();
-    if (falta <= 0){ d.textContent = "0"; h.textContent = "00"; m.textContent = "00";
-      document.getElementById("titulo-cuenta").textContent = "¡Llegó el día!"; return; }
-    var min = Math.floor(falta / 60000);
-    d.textContent = Math.floor(min / 1440);
-    h.textContent = String(Math.floor(min % 1440 / 60)).padStart(2, "0");
-    m.textContent = String(min % 60).padStart(2, "0");
-  }
-  pinta(); setInterval(pinta, 20000);
-
-  // Calendario de septiembre de 2027 (semana desde el domingo)
-  var r = document.getElementById("rejilla"), html = "";
-  ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"].forEach(function(n){ html += '<div class="dia-nombre">' + n + '</div>'; });
-  var inicio = new Date(2027, 8, 1).getDay();
-  for (var i = 0; i < inicio; i++) html += "<div></div>";
-  for (var dia = 1; dia <= 30; dia++){
-    if (dia === 4){
-      html += '<div class="dia gran-dia" aria-label="4 de septiembre, día de la boda">4<svg viewBox="0 0 50 46" aria-hidden="true"><path d="M25 41C10 31 3 22 6 12c3-8 13-9 19 1 6-10 17-9 20-1 3 10-5 19-20 29-1 .6-2-.6-3-2"/></svg></div>';
-    } else html += '<div class="dia">' + dia + '</div>';
-  }
-  r.innerHTML = html;
-
   // Menú desplegable
   var boton = document.getElementById("menu-boton"), menu = document.getElementById("menu");
   function abre(si){ menu.hidden = !si; boton.setAttribute("aria-expanded", String(si)); }
