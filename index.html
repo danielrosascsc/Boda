@@ -168,13 +168,30 @@ a.boton:hover{background:var(--malva)}
 }
 .f-bosque .nota{color:var(--bosque);background:#F6CFCA}
 
-/* Lista de deseos */
-.medios{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;text-align:left}
-.medio{background:var(--papel);border-radius:14px;padding:18px 16px 16px;border-top:3px solid var(--color,var(--oliva))}
-.medio h3{font-size:1.35rem;line-height:1.1}
-.medio small{display:block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--tinta-suave);margin:2px 0 12px}
-.medio p{margin:0;font-size:.9rem;color:var(--tinta-suave);border-top:1px dashed var(--linea);padding-top:10px}
-@media (max-width:380px){.medios{grid-template-columns:1fr}}
+/* Lista de deseos: luna de miel, tarjetas mezcladas con fotos */
+.ruta{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 10px;margin:0 auto 34px;max-width:520px;
+  font-family:var(--display);font-style:italic;font-size:1.05rem;color:var(--tinta-suave)}
+.ruta b{font-style:normal;font-weight:500;color:var(--tinta)}
+.ruta i{width:16px;height:1px;background:var(--malva);display:inline-block}
+.deseos{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-flow:dense;gap:12px;text-align:left;max-width:760px;margin:0 auto 30px}
+@media (min-width:640px){.deseos{grid-template-columns:repeat(3,1fr);gap:16px}}
+.deseo{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:16px 14px 14px;display:flex;flex-direction:column;gap:6px;position:relative}
+.deseo .num{font-family:var(--display);font-size:.95rem;color:var(--malva);font-variant-numeric:lining-nums}
+.deseo .pais{position:absolute;top:14px;right:12px;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--oliva)}
+.deseo h3{font-size:1.25rem;font-weight:500;line-height:1.15}
+.deseo p{margin:0;font-size:.9rem;line-height:1.4;color:var(--tinta-suave)}
+.deseo.destacado{background:var(--bosque);border-color:var(--bosque);color:var(--papel)}
+.deseo.destacado p{color:rgba(250,249,245,.78)}
+.deseo.destacado .num,.deseo.destacado .pais{color:#F6CFCA}
+.foto-deseo{margin:0;position:relative}
+.foto-deseo img{width:100%;height:100%;object-fit:cover;display:block}
+.foto-deseo.arco{grid-row:span 2;border-radius:999px 999px 14px 14px;overflow:hidden;box-shadow:0 0 0 5px var(--papel),0 0 0 6px var(--linea)}
+.foto-deseo.polaroid{grid-column:span 2;background:#fff;padding:10px 10px 34px;border-radius:3px;transform:rotate(-2.2deg);
+  box-shadow:0 14px 30px -16px rgba(77,70,41,.5);margin:8px 6px}
+.foto-deseo.polaroid img{aspect-ratio:4/3;height:auto}
+.foto-deseo.polaroid figcaption{position:absolute;left:0;right:0;bottom:8px;text-align:center;font-family:var(--display);font-style:italic;color:var(--tinta-suave)}
+.foto-deseo.circulo-foto{aspect-ratio:1;border-radius:50%;overflow:hidden;align-self:center;box-shadow:0 0 0 5px var(--papel),0 0 0 6px var(--linea);transform:rotate(3deg)}
+@media (min-width:640px){.foto-deseo.polaroid{grid-column:span 1;grid-row:span 2;transform:rotate(2deg)}.foto-deseo.polaroid img{aspect-ratio:3/4}}
 
 /* Preguntas */
 .preguntas{text-align:left;max-width:520px;margin:0 auto}
@@ -247,7 +264,7 @@ a.boton:hover{background:var(--malva)}
       <div class="detalles">
         <div class="detalle">
           <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M16 29s9-9.2 9-16a9 9 0 0 0-18 0c0 6.8 9 16 9 16z"/><circle cx="16" cy="13" r="3.4"/></svg>
-          <small>Lugar</small><h3>Club Campestre El Rancho</h3><p>Bogotá, Colombia</p>
+          <small>Lugar</small><h3>Iglesia del Club y Lobby del Club</h3><p>Club Campestre El Rancho, Bogotá</p>
         </div>
         <div class="detalle">
           <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="12" cy="17" r="7.5"/><circle cx="20" cy="17" r="7.5"/></svg>
@@ -318,13 +335,27 @@ a.boton:hover{background:var(--malva)}
       <svg class="ramita" aria-hidden="true"><use href="#ramita"/></svg>
       <p class="etiqueta">Regalos</p>
       <h2 class="titulo">Lista de <em>deseos</em></h2>
-      <p class="sub">Su presencia es nuestro mejor regalo. Si quieren tener un detalle con nosotros, pueden hacerlo por transferencia.</p>
-      <div class="medios">
-        <article class="medio" style="--color:var(--malva)"><h3>Nequi</h3><small>Colombia</small><p>Dato por confirmar</p></article>
-        <article class="medio" style="--color:var(--durazno)"><h3>Bre-B</h3><small>Colombia · llave</small><p>Dato por confirmar</p></article>
-        <article class="medio" style="--color:var(--oliva)"><h3>Bizum</h3><small>España</small><p>Dato por confirmar</p></article>
-        <article class="medio" style="--color:var(--bosque)"><h3>Cuenta bancaria</h3><small>Transferencia</small><p>Dato por confirmar</p></article>
+      <p class="sub">Su presencia es nuestro mejor regalo. Si quieren tener un detalle con nosotros, pueden ayudarnos a vivir nuestra luna de miel en Tailandia y Filipinas.</p>
+      <p class="ruta" aria-label="Ruta del viaje"><b>Barcelona</b><i></i>Bangkok<i></i>Chiang Mai<i></i>Krabi<i></i>Palawan<i></i><b>Coron</b></p>
+      <div class="deseos">
+        <article class="deseo destacado"><span class="num">01</span><span class="pais">Tailandia</span><h3>Vuelos Barcelona – Bangkok</h3><p>El primer paso de la aventura: cruzar medio mundo juntos.</p></article>
+        <figure class="foto-deseo arco" aria-hidden="true"><img src="foto-08.jpg" alt="" width="800" height="1067" loading="lazy"></figure>
+        <article class="deseo"><span class="num">02</span><span class="pais">Tailandia</span><h3>Templos y canales de Bangkok</h3><p>Wat Arun, el Gran Palacio y un paseo en barca por los canales.</p></article>
+        <article class="deseo"><span class="num">03</span><span class="pais">Tailandia</span><h3>Comida callejera en Bangkok</h3><p>Un recorrido nocturno probando de todo en los mercados.</p></article>
+        <article class="deseo"><span class="num">04</span><span class="pais">Tailandia</span><h3>Curso de cocina tailandesa</h3><p>Aprender a hacer pad thai y curry verde en Chiang Mai.</p></article>
+        <article class="deseo"><span class="num">05</span><span class="pais">Tailandia</span><h3>Santuario ético de elefantes</h3><p>Un día cuidando y bañando elefantes rescatados.</p></article>
+        <figure class="foto-deseo polaroid" aria-hidden="true"><img src="foto-12.jpg" alt="" width="800" height="600" loading="lazy"><figcaption>Nuestros viajes</figcaption></figure>
+        <article class="deseo"><span class="num">06</span><span class="pais">Tailandia</span><h3>Masaje tailandés para dos</h3><p>Una tarde de descanso después de tanto caminar.</p></article>
+        <article class="deseo"><span class="num">07</span><span class="pais">Tailandia</span><h3>Islas de Krabi en long-tail</h3><p>Bahías turquesa y playas escondidas en barca tradicional.</p></article>
+        <article class="deseo destacado"><span class="num">08</span><span class="pais">Filipinas</span><h3>Vuelo Tailandia – Filipinas</h3><p>De Bangkok a Palawan para la segunda parte del viaje.</p></article>
+        <article class="deseo"><span class="num">09</span><span class="pais">Filipinas</span><h3>Island hopping en El Nido</h3><p>Lagunas, acantilados y playas de arena blanca.</p></article>
+        <figure class="foto-deseo circulo-foto" aria-hidden="true"><img src="foto-04.jpg" alt="" width="800" height="1067" loading="lazy"></figure>
+        <article class="deseo"><span class="num">10</span><span class="pais">Filipinas</span><h3>Snorkel en Coron</h3><p>Arrecifes, lagos de agua cristalina y barcos hundidos.</p></article>
+        <article class="deseo"><span class="num">11</span><span class="pais">Filipinas</span><h3>Cena frente al mar</h3><p>Una cena romántica al atardecer para celebrar.</p></article>
+        <figure class="foto-deseo arco" aria-hidden="true"><img src="foto-11.jpg" alt="" width="800" height="1067" loading="lazy"></figure>
+        <article class="deseo"><span class="num">12</span><span class="pais">Filipinas</span><h3>Noche en villa sobre la playa</h3><p>Despertar con el sonido del mar.</p></article>
       </div>
+      <span class="nota">Datos para hacer su aporte, por definir</span>
     </div>
   </section>
 
